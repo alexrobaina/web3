@@ -1,24 +1,27 @@
-import { FC, useCallback, useEffect } from "react";
-import { useFormik } from "formik";
-import Layout from "../../components/common/Layout";
-import AccountForm from "./components/AccountForm";
-import { useWallet } from "../../hooks/useWallet";
+import { FC, useCallback, useEffect } from 'react';
+import { useFormik } from 'formik';
+import Layout from '../../components/common/Layout';
+import AccountForm from './components/AccountForm';
+import { useWallet } from '../../hooks/useWallet';
 
 const Account: FC = () => {
   const [getOwnBalance, state, sendTransaction]: any = useWallet();
 
   const formik = useFormik({
     onSubmit: () => {},
-    initialValues: { address: "", amount: "", to: "", errorAccount: "" },
+    initialValues: { address: '', amount: '', to: '', errorAccount: '' },
   });
 
-  const isDisabledGetBalance = useCallback((account: string) => {
-    return account === "";
-  }, []);
+  const isDisabledGetBalance = useCallback(
+    (account: string) => {
+      return account === '';
+    },
+    [state.account],
+  );
 
   useEffect(() => {
     if (state.account) getOwnBalance(state.account);
-  }, [state.account, getOwnBalance]);
+  }, [state.account]);
 
   const { values, handleChange } = formik;
 
