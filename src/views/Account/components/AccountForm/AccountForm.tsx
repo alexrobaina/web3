@@ -1,14 +1,14 @@
-import { FC, ChangeEvent } from "react";
-import { motion } from "framer-motion";
-import BaseInput from "../../../../components/common/BaseInput";
-import BaseNotifyMessage from "../../../../components/common/BaseNotifyMessage";
-import BaseButton from "../../../../components/common/BaseButton";
-import CardBalance from "../CardBalance";
-import BaseTitle from "../../../../components/common/BaseTitle";
-import BaseText from "../../../../components/common/BaseText";
-import { VARIANTS_OPACITY } from "../../../../constants/animation";
-import { maskAddress } from "../../../../utils/maskAddress";
-import styles from "./AccountForm.module.scss";
+import { FC, ChangeEvent } from 'react';
+import { motion } from 'framer-motion';
+import BaseInput from '../../../../components/common/BaseInput';
+import BaseNotifyMessage from '../../../../components/common/BaseNotifyMessage';
+import BaseButton from '../../../../components/common/BaseButton';
+import CardBalance from '../CardBalance';
+import BaseTitle from '../../../../components/common/BaseTitle';
+import BaseText from '../../../../components/common/BaseText';
+import { VARIANTS_OPACITY } from '../../../../constants/animation';
+import { maskAddress } from '../../../../utils/maskAddress';
+import styles from './AccountForm.module.scss';
 
 interface Props {
   testId: string;
@@ -56,11 +56,7 @@ const AccountForm: FC<Props> = ({
           />
         )}
         {errorAccount && (
-          <BaseNotifyMessage
-            canClose
-            testId="web3-error"
-            message={errorAccount}
-          />
+          <BaseNotifyMessage canClose testId="web3-error" message={errorAccount} />
         )}
         <div className={styles.containerAction}>
           <BaseButton
@@ -78,7 +74,7 @@ const AccountForm: FC<Props> = ({
             animate="visible"
             variants={VARIANTS_OPACITY}
             data-testid="card-balance"
-            transition={{ ease: "easeOut", delay: 0.2 }}
+            transition={{ ease: 'easeOut', delay: 0.2 }}
           >
             <BaseTitle marginTop={40} fontSize={20} text="Send Transaction" />
             <BaseInput
