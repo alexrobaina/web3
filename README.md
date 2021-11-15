@@ -16,7 +16,7 @@ https://challenge-web3.vercel.app/
 
 ## Install some libraries that I think help maintain good practices
 
-Slint
+eslint
 Prettier
 Husky
 
@@ -29,8 +29,16 @@ I recommend installing node v14.16.0 version to install the packages
 
 Run in the terminal
 
-### `cd challenge-web3`
+```
+$ cd challenge-web3
+```
 
-### `yarn`
+```
+$ yarn
+```
 
-### `yarn start`
+```
+$ yarn start
+```
+
+🍺 happy code!

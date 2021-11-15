@@ -14,6 +14,7 @@ interface Props {
   testId: string;
   balance: number;
   disabled: boolean;
+  isLoading: boolean;
   getOwnBalance: any;
   userAddress: string;
   errorAccount: string;
@@ -28,6 +29,7 @@ const AccountForm: FC<Props> = ({
   values,
   balance,
   disabled,
+  isLoading,
   userAddress,
   errorAccount,
   handleChange,
@@ -49,14 +51,7 @@ const AccountForm: FC<Props> = ({
       <BaseText text={maskAddress(userAddress)} />
       <form className={styles.columns}>
         {!isWeb3Initialized && (
-          <BaseNotifyMessage
-            canClose
-            testId="web3-error"
-            message="Please connect to MetaMask"
-          />
-        )}
-        {errorAccount && (
-          <BaseNotifyMessage canClose testId="web3-error" message={errorAccount} />
+          <BaseNotifyMessage testId="web3-error" message="Please connect to MetaMask" />
         )}
         <div className={styles.containerAction}>
           <BaseButton
@@ -67,7 +62,7 @@ const AccountForm: FC<Props> = ({
             onClick={() => getBalance(userAddress)}
           />
         </div>
-        {balance !== 0 && <CardBalance balance={balance} />}
+        {balance !== 0 && <CardBalance isLoading={isLoading} balance={balance} />}
         {balance !== 0 && (
           <motion.div
             initial="hidden"
@@ -77,6 +72,9 @@ const AccountForm: FC<Props> = ({
             transition={{ ease: 'easeOut', delay: 0.2 }}
           >
             <BaseTitle marginTop={40} fontSize={20} text="Send Transaction" />
+            {errorAccount !== '' && (
+              <BaseNotifyMessage testId="web3-error" message={errorAccount} />
+            )}
             <BaseInput
               label="To"
               type="text"

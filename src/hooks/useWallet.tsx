@@ -7,6 +7,7 @@ export const useWallet = () => {
   const [state, setState] = useState({
     balance: 0,
     account: '',
+    isLoading: false,
     errorAccount: '',
     isInitialized: false,
   });
@@ -15,21 +16,22 @@ export const useWallet = () => {
   web3 = new Web3(provider);
 
   const getOwnBalance = async (address: string) => {
-    try {
-      web3.eth.getBalance(address, (err: any, balance: any) => {
-        if (err) {
-          setState({ ...state, errorAccount: 'Something is wrong with MetaMask' });
-        } else {
-          const balanceUpdated = web3.utils.fromWei(balance, 'ether');
-          setState({ ...state, balance: balanceUpdated });
-        }
+    setState({ ...state, isLoading: true });
+    web3.eth
+      .getBalance(address)
+      .then((balance: any) => {
+        const balanceFormatted = web3.utils.fromWei(balance, 'ether');
+        setTimeout(() => {
+          setState({ ...state, balance: balanceFormatted, isLoading: false });
+        }, 2000);
+      })
+      .catch(() => {
+        setState({ ...state, errorAccount: 'Something is wrong with MetaMask' });
       });
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const sendTransaction = async (to: string, amount: string) => {
+    setState({ ...state, errorAccount: '' });
     try {
       web3.eth
         .sendTransaction({
@@ -39,26 +41,30 @@ export const useWallet = () => {
           gasLimit: 21000,
           gasPrice: 20000000000,
         })
-        .then((receipt: any) => {
+        .then((receipt: { account: string }) => {
           if (receipt) getOwnBalance(state.account);
+          setState({ ...state, errorAccount: '' });
+        })
+        .catch((error: any) => {
+          setState({ ...state, errorAccount: error?.message || 'Something is wrong' });
         });
-    } catch (error) {
+    } catch {
       setState({ ...state, errorAccount: 'Check the destination address' });
     }
   };
 
   const init = async () => {
+    setState({ ...state, errorAccount: '' });
     if (typeof provider !== 'undefined') {
       provider
         .request({ method: 'eth_requestAccounts' })
-        .then((accounts: any) => {
-          return setState({ ...state, account: accounts[0], isInitialized: true });
+        .then((accounts: [string]) => {
+          setState({ ...state, account: accounts[0], isInitialized: true });
         })
-        .catch((err: any) => {
-          if (err) setState({ ...state, errorAccount: 'Please connect with MetaMask' });
+        .catch(() => {
+          setState({ ...state, errorAccount: 'Please connect with MetaMask' });
         });
     }
-    return setState({ ...state, isInitialized: false });
   };
 
   useEffect(() => {

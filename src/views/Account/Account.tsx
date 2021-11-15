@@ -32,6 +32,7 @@ const Account: FC = () => {
         testId="account"
         balance={state.balance}
         handleChange={handleChange}
+        isLoading={state.isLoading}
         userAddress={state.account}
         getOwnBalance={getOwnBalance}
         sendTransaction={sendTransaction}
