@@ -9,7 +9,7 @@
   --grey: #88a9b9;
   --hawkes-blue: #e3f2fd;
   --black-russian: #0e0033;
-  --periwinkle-gray: #dee3f2;
+  --periwinkle-grey: #dee3f2;
   --anakiwa: #9dcde4;
   --hawkes-blue: #e3f2fd;
   --outer-space: #303538;
@@ -29,14 +29,14 @@
 
   --button-background: var(--anakiwa);
   --button-text: var(--dark);
-  --button-background-disabled-text: var(--periwinkle-gray);
+  --button-background-disabled-text: var(--periwinkle-grey);
 
   --input-border-color: var(--anakiwa);
   --input-focus: var(--denimapprox);
   --input-hover: var(--denimapprox);
   --input-error: var(--sea-pink);
   --input-icon-eye-password: var(--anakiwa);
-  --input-placeholder: var(--grey);
+  --input-placeholder: #3a525e;
 
   --error-background-color: var(--red-error);
   --error-message-color: var(--ligth);
@@ -44,6 +44,8 @@
   --border-card-color: var(--outer-space);
 
   --loading-ring: var(--anakiwa);
+
+  --label-text-color: var(--ligth);
 }
 
 :root .light {
@@ -59,7 +61,7 @@
 
   --button-background: var(--anakiwa);
   --button-text: var(--dark);
-  --button-background-disabled-text: var(--periwinkle-gray);
+  --button-background-disabled-text: var(--periwinkle-grey);
 
   --input-border-color: var(--anakiwa);
   --input-focus: var(--denimapprox);
@@ -74,4 +76,6 @@
   --border-card-color: var(--hawkes-blue);
 
   --loading-ring: var(--anakiwa);
+
+  --label-text-color: var(--dark);
 }
