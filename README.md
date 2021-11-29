@@ -1,4 +1,4 @@
-# Challege
+# Tempate - react - web3
 
 The project is made with typescript and react js. Add different libraries and various components that I usually use in my projects and I am modifying as needed.
 
@@ -41,4 +41,4 @@ $ yarn
 $ yarn start
 ```
 
-🍺 happy code!
+🍺  happy code!
